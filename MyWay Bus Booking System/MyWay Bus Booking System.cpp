@@ -285,5 +285,20 @@ int main() {
                 std::cout << "Booking deleted!\n";
             }
 
-
             }
+  else if (choice2 == 5) {
+                loggedIn = false;
+                std::cout << "Logged out.\n";
+            }
+            else if (choice2 == 6) {
+                break;
+            }
+            else {
+                std::cout << "Unknown command.\n";
+            }
+        }
+
+    }
+
+    return 0;
+}
