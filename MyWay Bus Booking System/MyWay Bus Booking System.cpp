@@ -238,6 +238,52 @@ int main() {
 
                     std::cout << "\n\nBooking updated!\n";
                 }
+                else if (choice2 == 3) {
+                system("cls");
+                std::cout << "Your Bookings\n";
+                if (bookingCount == 0) {
+                    std::cout << "No bookings yet.\n";
+                }
+                else {
+                    for (int i = 0; i < bookingCount; i++) {
+                        std::cout << i + 1 << ". From " << bookings[i].pickup
+                            << " To " << bookings[i].dropoff
+                            << " At " << bookings[i].time 
+                            << " Fare: RM " << std::fixed << std::setprecision(2) << bookings[i].fare << "\n";
+
+                    }
+                }
+            }
+
+            else if (choice2 == 4) {
+                system("cls");
+                if (bookingCount == 0) {
+                    std::cout << "No bookings to delete.\n";
+                    system("pause");
+                    continue;
+                }
+                std::cout << "Delete Booking\n";
+                for (int i = 0; i < bookingCount; i++) {
+                    std::cout << i + 1 << ". From " << bookings[i].pickup
+                        << " To " << bookings[i].dropoff
+                        << " At " << bookings[i].time
+                        << " Fare: RM " << std::fixed << std::setprecision(2) << bookings[i].fare << "\n";
+                }
+                std::cout << "\nEnter the booking's number you would like to delete: ";
+                int index;
+                std::cin >> index;
+                if (index < 1 || index > bookingCount) {
+                    std::cout << "Invalid booking number.\n";
+                    system("pause");
+                    continue;
+                }
+                index--;
+                for (int i = index; i < bookingCount - 1; i++) {
+                    bookings[i] = bookings[i + 1];
+                }
+                bookingCount--;
+                std::cout << "Booking deleted!\n";
+            }
 
 
             }
