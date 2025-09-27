@@ -81,78 +81,85 @@ int main() {
 
             if (choice2 == 1) {
             booking:
-                system("cls");
-                cout << "Booking\n";
-                cout << "Please Choose Your Pickup Location: \n";
-                cout << "1. DPulzeMallX \n2. Apple Store \n3. Mamak Power\n4. IoI Mall\n";
-                cout << "\nSelect option: ";
+                char again = 'Y';
+                while (again == 'Y' || again == 'y') {
+                    system("cls");
+                    cout << "\n==============================\n";
+                    cout << "         Booking Menu\n";
+                    cout << "==============================\n\n";
+                    cout << "Please Choose Your Pickup Location: \n";
+                    cout << "1. DPulzeMallX \n2. Apple Store \n3. Mamak Power\n4. IoI Mall\n";
+                    cout << "\nSelect option: ";
 
-                if (!(cin >> pickup) || pickup < 1 || pickup > 4) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Invalid selection.\n";
-                    system("pause");
-                    goto booking;
-                }
+                    if (!(cin >> pickup) || pickup < 1 || pickup > 4) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Invalid selection.\n";
+                        system("pause");
+                        goto booking;
+                    }
 
-                cout << "\n\nPlease Choose Your DropOff Location: \n";
-                cout << "1. DPulzeMallX \n2. Apple Store \n3. Mamak Power\n4. IoI Mall\n";
-                cout << "\nSelect option: ";
+                    cout << "\n\nPlease Choose Your DropOff Location: \n";
+                    cout << "1. DPulzeMallX \n2. Apple Store \n3. Mamak Power\n4. IoI Mall\n";
+                    cout << "\nSelect option: ";
 
-                if (!(cin >> dropoff) || dropoff < 1 || dropoff > 4) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Invalid selection.\n";
-                    system("pause");
-                    goto booking;
-                }
+                    if (!(cin >> dropoff) || dropoff < 1 || dropoff > 4) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Invalid selection.\n";
+                        system("pause");
+                        goto booking;
+                    }
 
-                if (pickup == dropoff) {
-                    cout << "\nPickup and DropOff cannot be the same location. Please Try Again\n";
-                    system("pause");
-                    goto booking;
-                }
+                    if (pickup == dropoff) {
+                        cout << "\nPickup and DropOff cannot be the same location. Please Try Again\n";
+                        system("pause");
+                        goto booking;
+                    }
 
-                cout << "\n\nPlease Choose Your Pickup Time: \n";
-                cout << "1. 4.00 p.m. \n2. 5.00 p.m.\n3. 6.00 p.m.\n";
-                cout << "\nSelect option: ";
+                    cout << "\n\nPlease Choose Your Pickup Time: \n";
+                    cout << "1. 4.00 p.m. \n2. 5.00 p.m.\n3. 6.00 p.m.\n";
+                    cout << "\nSelect option: ";
 
-                if (!(cin >> timechoice) || timechoice < 1 || timechoice > 3) {
-                    cin.clear();
-                    cin.ignore(1000, '\n');
-                    cout << "Invalid time selection.\n";
-                    system("pause");
-                    goto booking;
-                }
+                    if (!(cin >> timechoice) || timechoice < 1 || timechoice > 3) {
+                        cin.clear();
+                        cin.ignore(1000, '\n');
+                        cout << "Invalid time selection.\n";
+                        system("pause");
+                        goto booking;
+                    }
 
-                float fare = calculateFare(pickup, dropoff);
+                    float fare = calculateFare(pickup, dropoff);
 
-                cout << "\n\nYou Have Made A Booking To PickUp From: "
-                    << locations[pickup]
-                    << " And DropOff At: "
-                    << locations[dropoff]
-                    << " At: "
-                    << times[timechoice]
-                    << "\n";
+                    // Show summary
+                    cout << "\n==============================\n";
+                    cout << "Booking Summary for " << username << ":\n";
+                    cout << "------------------------------\n";
+                    cout << " From : " << locations[pickup] << "\n";
+                    cout << " To   : " << locations[dropoff] << "\n";
+                    cout << " Time : " << times[timechoice] << "\n";
+                    cout << " Fare : RM " << fixed << setprecision(2) << fare << "\n";
+                    cout << "==============================\n";
 
-                cout << "Total Fare: RM " << fixed << setprecision(2) << fare << "\n";
+                    // Confirm
+                    cout << "Confirm booking? (Y/N): ";
+                    char confirm;
+                    cin >> confirm;
 
-                cout << "Please Confirm Your Booking By Entering (y/Y): ";
+                    if (confirm == 'Y' || confirm == 'y') {
+                        bookings[bookingCount++] = { locations[pickup], locations[dropoff], times[timechoice], fare };
+                        cout << "Booking Confirmed! Thank you, " << username << "!\n";
+                    }
+                    else {
+                        cout << "Booking cancelled.\n";
+                    }
 
-                char confirm;
-                cin >> confirm;
-
-                if (confirm == 'y' || confirm == 'Y') {
-                    bookings[bookingCount++] = { locations[pickup], locations[dropoff], times[timechoice], fare };
-                    cout << "Booking Confirmed! Thank you for using MyWay Bus Booking System.\n";
-                }
-                else {
-                    cout << "Booking Cancelled.\n";
-                    system("pause");
-                    goto booking;
+                    cout << "\nDo you want to book again? (Y/N): ";
+                    cin >> again;
                 }
                 system("pause");
             }
+
 
             else if (choice2 == 2) {
                 system("cls");
